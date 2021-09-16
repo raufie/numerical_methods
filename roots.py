@@ -18,6 +18,7 @@ def apply_bisection(f, interval, theta):
                # print(interval, end=" ")
             else:
                 print("f(x1),f(x2) both greater than 0")
+                break
 
             root = (interval[0]+interval[1])/2
             error = (abs(interval[0]-interval[1]) /
@@ -27,6 +28,7 @@ def apply_bisection(f, interval, theta):
 
         else:
             print("f(x1),f(x2) both greater than 0")
+            break
 
         if(abs(f(x1)-f(x2)) < theta):
             print("converged")
