@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def apply_bisection(f, interval, theta):
 
     while True:
@@ -35,42 +32,8 @@ def apply_bisection(f, interval, theta):
 
 
 def f(x):
-    return (x-1/3)**3 - x
+    return x*x
 
 
-def run_iteration(x1, x2, xr_old, t):
-    xr = (x1+x2)/2
-    fx1 = f(x1)
-    fx2 = f(x2)
-    e_a = abs((xr-xr_old)/xr)*100
-    e_t = abs((t-xr)/t)*100
-    fxr = f(xr)
-    print("x_1 = "+str("{: .4f}".format(x1)), end=" | ")
-    print("x_r = "+str("{: .4f}".format(xr)), end=" | ")
-    print("x_2 = "+str("{: .4f}".format(x2)), end=" | ")
-
-    print("fx1 = "+str("{: .4f}".format(fx1)), end=" | ")
-    print("fx2 = "+str("{: .4f}".format(fx2)), end=" | ")
-    print("fxr = "+str("{: .4f}".format(fxr)), end=" | ")
-    print("e_a= "+str("{: .4f}".format(e_a)), end=" | ")
-    print("e_t = " + str("{: .4f}".format(e_t)))
-    return xr, fx1, fx2, fxr
-
-
-def run_tabular():
-
-    x1 = 0
-    x2 = 2
-    xr_old = 1
-    t = 1.3572
-    for i in range(10):
-        xr, fx1, fx2, fxr = run_iteration(x1, x2, xr_old, t)
-        if fx1*fxr < 0:
-            x2 = xr
-        else:
-            x1 = xr
-        xr_old = xr
-
-
-apply_bisection(f, [0, 2], 0.0001)
-# run_tabular()
+r_max = 1
+apply_bisection(lambda x: f(x) - r_max, [0, 5], 0.01)
