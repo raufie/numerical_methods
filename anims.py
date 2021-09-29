@@ -1,5 +1,6 @@
 from manim import *
 import numpy as np
+from Roots import Roots
 
 
 class Anim (Scene):
@@ -74,8 +75,7 @@ class Anim (Scene):
                  x_label, line_req, ax, vert_line)
         # self.play(t.animate.set_value(3))
 
-
-# BISEC
+ # BISEC
         iteration = 0
         while True:
             x1 = interval[0]
@@ -119,3 +119,56 @@ class Anim (Scene):
         self.play(FadeOut(graph, d, d2, text, it, num, x_1, x_label, ax))
         self.play(Write(t_end), run_time=1)
         self.wait(2)
+
+
+class Converge2Params(ThreeDScene):
+    def construct(self):
+        def f(x, y):
+            return x**2-y**3 - 1
+
+ # Setting up axes
+        ax = ThreeDAxes(z_range=[-5, 5], y_range=[-5, 5], tips=False)
+        x_label = ax.get_x_axis_label("x")
+        y_label = ax.get_y_axis_label("y")
+        z_label = ax.get_z_axis_label("z")
+
+        self.add(ax, x_label, y_label, z_label)
+        vg = VGroup()
+        self.set_camera_orientation(theta=-75*DEGREES, phi=120*DEGREES)
+ # making plane
+        r = Roots(lambda x, y: x**2-y**3 - 1, [[-5, -5], [10, 10]], 0.001)
+
+        intervals = r.apply_bisection_2_params()
+
+        def f(x, y):
+            return x**2-y**3 - 1
+
+        def f_p(x, y):
+            return np.array([x, y, x**2-y**3 - 1])
+        surface = Surface(
+            f_p,
+            u_range=[-5, 5],
+            v_range=[-5, 5],
+
+            checkerboard_colors=[RED_D, RED_E], resolution=(15, 32),
+        )
+        surface.set_opacity(0.3)
+        self.add(surface)
+        for arr in intervals:
+
+            x1 = arr[0][0]
+            y1 = arr[0][1]
+            x2 = arr[1][0]
+            y2 = arr[1][1]
+            # l1 = Line3D([x1, 0, 0], [x2, 0, 0])
+            # l2 = Line3D([0, y1, 0], [0, y2, 0])
+            l1 = Line([x1, 0, 0], [0, y1, 0])
+            # l2 = Line([x1, 0, 0], [0, y2+0.00001, 0])
+            # l3 = Line([x2, 0, 0], [0, y2+0.00001, 0])
+            l4 = Line([x2, 0, 0], [0, y2, 0])
+
+            vg = VGroup(l1, l4)
+            self.play(Create(vg))
+            self.play(FadeOut(vg))
+
+        # print(ax.coords_to_point([-1, -1, -1]))

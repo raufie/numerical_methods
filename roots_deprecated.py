@@ -37,7 +37,7 @@ def apply_bisection(f, interval, theta):
 
 
 def f(x):
-    return -12 -21*x + 18* x**2 - 2.75*x**3
+    return -12 - 21*x + 18 * x**2 - 2.75*x**3
 
 
 def run_iteration(x1, x2, xr_old, t):
@@ -59,12 +59,12 @@ def run_iteration(x1, x2, xr_old, t):
     return xr, fx1, fx2, fxr
 
 
-def run_tabular():
+def run_tabular(x1, x2, t):
+    # <- [xL,xU], t = True root
+    # -> needs the run iteration function
+    #
 
-    x1 = -1
-    x2 = 0
     xr_old = 1
-    t = 1.3572
     for i in range(10):
         xr, fx1, fx2, fxr = run_iteration(x1, x2, xr_old, t)
         if fx1*fxr < 0:
@@ -75,4 +75,4 @@ def run_tabular():
 
 
 #apply_bisection(f, [0, 2], 0.0001)
-run_tabular()
+# run_tabular()
