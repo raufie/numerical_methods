@@ -6,3 +6,4 @@ for n=1:ntimes
     x = r*x*(1-x);
 end
 fprintf('%f\n',x)
+
