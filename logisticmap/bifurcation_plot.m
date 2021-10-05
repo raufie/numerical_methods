@@ -38,7 +38,7 @@ for m = mu
         x_data(k,i) = x;
     end
     
-    i = i+1;
+    i = i+1
     
 end
 
@@ -53,7 +53,7 @@ for i=1:n_mu
 x_histogram(:,i)=histcounts(x_data(:,i),x_edges);
 x_histogram(:,i)=255*x_histogram(:,i)/max(x_histogram(:,i));
 end
-colormap(flipud(gray(256))); brighten(-0.8); cmap=colormap;
+colormap(flipud(hot(256))); brighten(-0.8); cmap=colormap;
 im=image([mu_edges(1) mu_edges(end)], [x_edges(1) x_edges(end)], x_histogram);
 set(gca,'YDir','normal');
 xlabel('$\mu$','Interpreter','latex','FontSize',14);

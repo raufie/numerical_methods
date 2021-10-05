@@ -6,7 +6,7 @@ mu=(mu_edges(1:n_mu)+mu_edges(2:n_mu+1))/2; %values of mu on which to perform co
 x_edges=linspace(0,1,n_x+1); %edges of x pixels
 
 n_trans=20000; %transient iterations
-n_data=10000;  %number of x values per mu value
+n_data=5;  %number of x values per mu value
 
 x_data=zeros(n_data,n_mu); %x-data used to construct figure
 
@@ -43,5 +43,20 @@ for m = mu
 end
 
 
-save('x_mat','x_data')
+%save('x_mat','x_data')
+
+i = 1;
+%disp(mu)
+for m = mu
+    for k = 1: n_data
+        plot(m,x_data(k, i),'.')
+        axis([0 5 0 1])
+       
+    end
+    i = i +1;
+    hold on;
+        %disp(x_data(k, i))
+    pause(0.000000000001)
+end
+
 
