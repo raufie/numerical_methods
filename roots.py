@@ -43,6 +43,7 @@ class Bisection:
 
                 print((x1+x2)/2)
                 return self.interval
+        return False
 
     def get_iteration_table(self):
         t = self.true_root
